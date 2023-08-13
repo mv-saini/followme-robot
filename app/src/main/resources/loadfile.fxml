@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.followme.app.FileLoaderController">
+   <children>
+      <Label layoutX="22.0" layoutY="100.0" prefHeight="30.0" prefWidth="214.0" text="How many robots?">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="21.0" layoutY="179.0" prefHeight="30.0" prefWidth="194.0" text="Choose enviornment">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="21.0" layoutY="251.0" prefHeight="30.0" prefWidth="163.0" text="Choose program">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="env" layoutX="407.0" layoutY="182.0" mnemonicParsing="false" onAction="#loadEnv" text="Choose File...." />
+      <Button fx:id="program" layoutX="407.0" layoutY="254.0" mnemonicParsing="false" onAction="#LoadProgram" text="Choose File...." />
+      <TextField fx:id="robotField" layoutX="377.0" layoutY="103.0" />
+      <Button fx:id="runSim" layoutX="409.0" layoutY="351.0" mnemonicParsing="false" onAction="#run" prefHeight="25.0" prefWidth="88.0" text="RUN" />
+   </children>
+</AnchorPane>

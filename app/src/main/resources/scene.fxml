@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.followme.app.SceneController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="845.0" minWidth="10.0" prefWidth="801.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="470.0" minWidth="10.0" prefWidth="149.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="635.0" minHeight="10.0" prefHeight="630.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="354.0" minHeight="10.0" prefHeight="89.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+        <ButtonBar fx:id="buttonBar" prefHeight="89.0" prefWidth="801.0" GridPane.rowIndex="1">
+            <buttons>
+                <Button fx:id="clearBtn" mnemonicParsing="false" onAction="#clearScene" prefWidth="98.0" text="CLEAR" />
+                <Button fx:id="loadBtn" layoutX="736.0" layoutY="42.0" mnemonicParsing="false" onAction="#loadScene" text="LOAD" />
+                <Button fx:id="nextBtn" layoutX="651.0" layoutY="42.0" mnemonicParsing="false" onAction="#executeNext" text="NEXT" />
+                <Button fx:id="leftBtn" layoutX="566.0" layoutY="42.0" mnemonicParsing="false" onAction="#moveLeft" text="LEFT" />
+                <Button fx:id="upBtn" layoutX="481.0" layoutY="42.0" mnemonicParsing="false" onAction="#moveUp" text="UP" />
+                <Button fx:id="downBtn" layoutX="396.0" layoutY="42.0" mnemonicParsing="false" onAction="#moveDown" text="DOWN" />
+                <Button fx:id="rightBtn" layoutX="311.0" layoutY="42.0" mnemonicParsing="false" onAction="#moveRight" text="RIGHT" />
+            </buttons>
+        </ButtonBar>
+        <Pane fx:id="drawingArea" prefHeight="630.0" prefWidth="801.0" />
+      <Pane fx:id="emptyPane" prefHeight="89.0" prefWidth="149.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <children>
+            <Label alignment="CENTER" layoutX="24.0" layoutY="14.0" prefHeight="17.0" prefWidth="104.0" text="Steps to execute" />
+            <TextField fx:id="stepsText" layoutX="22.0" layoutY="45.0" prefHeight="25.0" prefWidth="104.0" text="1" />
+         </children></Pane>
+      <ScrollPane GridPane.columnIndex="1">
+         <content>
+            <TextFlow fx:id="logger" prefHeight="630.0" prefWidth="149.0" />
+         </content>
+      </ScrollPane>
+    </children>
+</GridPane>
