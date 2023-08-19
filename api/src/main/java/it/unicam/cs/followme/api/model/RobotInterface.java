@@ -3,6 +3,7 @@ package it.unicam.cs.followme.api.model;
 /**
  * Any class that implements this interface can create a robot.
  * @param <D> Direction
+ * @author Mohit Vijay Saini
  */
 public interface RobotInterface<D extends Direction> {
 

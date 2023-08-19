@@ -9,6 +9,8 @@ import it.unicam.cs.followme.api.model.ShapeInterface;
  * DoForever program whose condition is never satisfied.
  * @param <R> Robots that extends {@link RobotInterface}
  * @param <S> Shapes that extends {@link ShapeInterface}
+ * @author Mohit Vijay Saini
+ * @see LoopProgramsInterface
  */
 public final class ForeverProgram<R extends RobotInterface<Direction>, S extends ShapeInterface> implements LoopProgramsInterface<R, S> {
 

@@ -13,6 +13,8 @@ import java.util.Map;
 /**
  * This class loads the environment file to be parsed.
  * @param <R> Robots that extends {@link RobotInterface}
+ * @author Mohit Vijay Saini
+ * @see EnvironmentLoaderInterface
  */
 public class EnvironmentLoader<R extends RobotInterface<Direction>> implements EnvironmentLoaderInterface<R, ShapeInterface> {
 

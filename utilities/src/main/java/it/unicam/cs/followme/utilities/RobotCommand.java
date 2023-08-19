@@ -3,6 +3,10 @@ package it.unicam.cs.followme.utilities;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+/**
+ * This enum was provided by the Advanced Programming professor.
+ * @author Michele Loreti.
+ */
 public enum RobotCommand {
 
 

@@ -2,6 +2,10 @@ package it.unicam.cs.followme.utilities;
 
 import java.util.stream.IntStream;
 
+/**
+ * This interface was provided by the Advanced Programming professor.
+ * @author Michele Loreti.
+ */
 @FunctionalInterface
 public interface FollowMeShapeChecker {
 

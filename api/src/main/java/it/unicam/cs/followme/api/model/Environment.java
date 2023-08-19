@@ -1,15 +1,14 @@
 package it.unicam.cs.followme.api.model;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
  * This class represents an environment that contains robots, shapes and their coordinates.
  * @param <R> robots
  * @param <S> shapes
+ * @author Mohit Vijay Saini
+ * @see EnvironmentInterface
  */
 public class Environment<R extends RobotInterface<Direction>, S extends ShapeInterface> implements EnvironmentInterface<R, S> {
 
@@ -25,6 +24,11 @@ public class Environment<R extends RobotInterface<Direction>, S extends ShapeInt
 
     public Environment(Map<R, Coordinates> robots, Map<S, Coordinates> shapes) {
         if(robots == null || shapes == null) throw new IllegalArgumentException("Robots or Shapes are null");
+
+        R r = (R) new Robot<>(new Direction(10, 10, 10));
+        Coordinates c = new Coordinates(0,0);
+        robots.put(r, c);
+
         this.robots = robots;
         this.shapes = shapes;
     }
@@ -41,6 +45,9 @@ public class Environment<R extends RobotInterface<Direction>, S extends ShapeInt
 
     @Override
     public Map<R, Coordinates> robotsWithLabel(String labelToFollow){
+        if(labelToFollow == null)
+            throw new IllegalArgumentException("The provided label is null.");
+
         return this.robots.entrySet().stream()
                 .filter(entry -> entry.getKey().getLabel().equals(labelToFollow))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
@@ -48,11 +55,17 @@ public class Environment<R extends RobotInterface<Direction>, S extends ShapeInt
 
     @Override
     public double distanceBetween(Coordinates c1, Coordinates c2){
+        if(c1 == null || c2 == null)
+            throw new IllegalArgumentException("One of two coordinates provided were null.");
+
         return Math.sqrt(Math.pow(c1.getX() - c2.getX(), 2) + Math.pow(c1.getY() - c2.getY(), 2));
     }
 
     @Override
     public Coordinates averageOf(List<Coordinates> avgOf){
+        if(avgOf.isEmpty())
+            throw new IllegalArgumentException("List is empty.");
+
         return new Coordinates(
                 avgOf.stream().collect(Collectors.averagingDouble(Coordinates::getX)),
                 avgOf.stream().collect(Collectors.averagingDouble(Coordinates::getY))
@@ -67,6 +80,8 @@ public class Environment<R extends RobotInterface<Direction>, S extends ShapeInt
 
     @Override
     public Set<String> robotInsideShapes(R robot) {
+        if(this.robots.get(robot) == null)
+            throw new IllegalArgumentException("No such robot in the environment.");
         return this.shapes.entrySet().stream()
                 .filter(entry -> entry.getKey().insideArea(this.robots.get(robot), entry.getValue()))
                 .map(Map.Entry::getKey)

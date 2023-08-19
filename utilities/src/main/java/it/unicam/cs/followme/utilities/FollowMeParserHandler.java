@@ -11,6 +11,10 @@ package it.unicam.cs.followme.utilities;
  *
  * @see FollowMeParser
  *
+ * This interface was provided by the Advanced Programming professor.
+ * @author Michele Loreti.
+ *
+ *
  */
 public interface FollowMeParserHandler {
 

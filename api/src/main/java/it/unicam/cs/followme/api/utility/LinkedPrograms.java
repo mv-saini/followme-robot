@@ -13,6 +13,7 @@ import it.unicam.cs.followme.utilities.RobotCommand;
  * This class represents the linked list of programs.
  * @param <R> Robots that extends {@link RobotInterface}
  * @param <S> Shapes that extends {@link ShapeInterface}
+ * @author Mohit Vijay Saini
  */
 public class LinkedPrograms<R extends RobotInterface<Direction>, S extends ShapeInterface> {
 
@@ -69,7 +70,7 @@ public class LinkedPrograms<R extends RobotInterface<Direction>, S extends Shape
 
     /**
      * Generates the new node with the given program and connect the new node to the end of the list.
-     * @param element
+     * @param element element to be added
      */
     public void add(Program<R, S> element) {
         Node<R, S> newNode  = new Node<>(element, this.counter, null);

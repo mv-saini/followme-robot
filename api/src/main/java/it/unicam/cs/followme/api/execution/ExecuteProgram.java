@@ -13,6 +13,7 @@ import java.util.List;
  * This class is responsible for executing the programs by calling the instances of {@link InitializedProgramsInterface}
  * @param <R> Robots that extends {@link RobotInterface}
  * @param <S> Shapes that extends {@link ShapeInterface}
+ * @author Mohit Vijay Saini
  */
 public class ExecuteProgram<R extends RobotInterface<Direction>, S extends ShapeInterface> {
 
@@ -45,7 +46,7 @@ public class ExecuteProgram<R extends RobotInterface<Direction>, S extends Shape
         ArrayList<String> allThoseJustExecuted = new ArrayList<>();
         for(int i = 0; i < n; i++){
             for (InitializedProgramsInterface<R, S> initializedProgram : this.initializedPrograms) {
-                if(initializedProgram.terminated()){
+                if(!initializedProgram.terminated()){
                     allThoseJustExecuted.add(initializedProgram.executeNext(this.environment));
                 }
             }

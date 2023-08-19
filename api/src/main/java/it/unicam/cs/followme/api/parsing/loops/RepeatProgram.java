@@ -5,10 +5,14 @@ import it.unicam.cs.followme.api.model.EnvironmentInterface;
 import it.unicam.cs.followme.api.model.RobotInterface;
 import it.unicam.cs.followme.api.model.ShapeInterface;
 
+import java.util.Objects;
+
 /**
  * Repeat program whose condition is satisfied only when the program and its sub programs are executed given number of times.
  * @param <R> Robots that extends {@link RobotInterface}
  * @param <S> Shapes that extends {@link ShapeInterface}
+ * @author Mohit Vijay Saini
+ * @see LoopProgramsInterface
  */
 public final class RepeatProgram<R extends RobotInterface<Direction>, S extends ShapeInterface> implements LoopProgramsInterface<R, S> {
 
@@ -56,6 +60,14 @@ public final class RepeatProgram<R extends RobotInterface<Direction>, S extends 
         LoopProgramsInterface<R, S> copied = new RepeatProgram<>(this.repeatFor);
         copied.setJumpTo(this.getJumpTo());
         return copied;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RepeatProgram<?, ?> that = (RepeatProgram<?, ?>) o;
+        return repeatFor == that.repeatFor && counter == that.counter && jumpTo == that.jumpTo;
     }
 
     @Override

@@ -11,6 +11,8 @@ import java.util.*;
 
 /**
  * This class is responsible for returning the map of shapes and their coordinates.
+ * @author Mohit Vijay Saini
+ * @see ShapeParserInterface
  */
 public class ShapeParser implements ShapeParserInterface {
 

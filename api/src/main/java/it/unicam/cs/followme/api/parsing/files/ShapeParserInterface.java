@@ -12,6 +12,7 @@ import java.util.Map;
 
 /**
  * Any class that implements this interface can add the parsed shapes.
+ * @author Mohit Vijay Saini
  */
 public interface ShapeParserInterface {
 

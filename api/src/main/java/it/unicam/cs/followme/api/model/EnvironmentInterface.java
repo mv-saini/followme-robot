@@ -9,6 +9,7 @@ import java.util.Set;
  * Any class that implements this interface can create an environment made of shapes and robots.
  * @param <R> Robots
  * @param <S> Shapes
+ * @author Mohit Vijay Saini
  */
 public interface EnvironmentInterface<R extends RobotInterface<Direction>, S extends ShapeInterface> {
 

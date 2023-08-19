@@ -1,8 +1,12 @@
 package it.unicam.cs.followme.api.model;
 
+import java.util.Objects;
+
 /**
  * This class represents a robot. It contains the direction of the robot to move towards and the label to signal.
  * @param <D> Direction
+ * @author Mohit Vijay Saini
+ * @see RobotInterface
  */
 public class Robot<D extends Direction> implements RobotInterface<D>{
 
@@ -39,6 +43,14 @@ public class Robot<D extends Direction> implements RobotInterface<D>{
     @Override
     public void resetLabel(){
         this.label = "";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Robot<?> robot = (Robot<?>) o;
+        return Objects.equals(direction, robot.direction) && Objects.equals(label, robot.label);
     }
 
     @Override

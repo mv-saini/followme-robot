@@ -2,6 +2,8 @@ package it.unicam.cs.followme.api.model;
 
 /**
  * This class represents a circle.
+ * @author Mohit Vijay Saini
+ * @see ShapeInterface
  */
 public class ShapeCircle implements ShapeInterface {
 

@@ -8,7 +8,8 @@ import it.unicam.cs.followme.api.model.RobotInterface;
 import java.util.*;
 
 /**
- * This class generates N number of robots between a pre-defined range (x,y) with random direction and speed.
+ * This class generates n number of robots between a pre-defined range (x,y) with random direction and speed.
+ * @author Mohit Vijay Saini
  */
 public class RobotSpawner {
 
@@ -37,7 +38,6 @@ public class RobotSpawner {
             robots.put(new Robot<>(new Direction(random.nextDouble(), random.nextDouble(), random.nextDouble())),
                     new Coordinates(randomGeneratorRange(), randomGeneratorRange())
             );
-            //System.out.println(robots.get(i).toString());
         }
 
         return robots;

@@ -212,7 +212,10 @@ public class SceneController implements Initializable {
     private void drawRectangle(Coordinates value, ShapeRectangle rectangle) {
         Coordinates scaled = new Coordinates(value.getX(), value.getY() * -1).addCoordinates(center.addCoordinates(offset));
 
-        Rectangle r = new Rectangle(scaled.getX() * this.zoomLevel, scaled.getY() * this.zoomLevel,
+        double x_tl = scaled.getX() - (rectangle.getWidth() / 2);
+        double y_tl = scaled.getY() - (rectangle.getHeight() / 2);
+
+        Rectangle r = new Rectangle(x_tl * this.zoomLevel, y_tl * this.zoomLevel,
                 rectangle.getWidth() * this.zoomLevel, rectangle.getHeight() * this.zoomLevel);
         r.setFill(javafx.scene.paint.Color.BLUE);
 

@@ -2,6 +2,7 @@ package it.unicam.cs.followme.api.model;
 
 /**
  * Any class that implements this interface is considered a shape.
+ * @author Mohit Vijay Saini
  */
 public interface ShapeInterface {
 

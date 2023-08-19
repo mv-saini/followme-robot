@@ -11,6 +11,7 @@ import java.util.Map;
  * Any class that implements this interface can load an environment file.
  * @param <R> Robots that extends {@link RobotInterface}
  * @param <S> Shapes that extends {@link ShapeInterface}
+ * @author Mohit Vijay Saini
  */
 public interface EnvironmentLoaderInterface<R extends RobotInterface<Direction>, S extends ShapeInterface> {
 

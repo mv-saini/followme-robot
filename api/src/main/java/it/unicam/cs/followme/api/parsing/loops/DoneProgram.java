@@ -9,6 +9,8 @@ import it.unicam.cs.followme.api.model.ShapeInterface;
  * Done program that always jumps to the start of its loop.
  * @param <R> Robots that extends {@link RobotInterface}
  * @param <S> Shapes that extends {@link ShapeInterface}
+ * @author Mohit Vijay Saini
+ * @see LoopProgramsInterface
  */
 public class DoneProgram<R extends RobotInterface<Direction>, S extends ShapeInterface> implements LoopProgramsInterface<R, S> {
 

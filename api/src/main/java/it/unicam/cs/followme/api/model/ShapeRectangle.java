@@ -2,6 +2,8 @@ package it.unicam.cs.followme.api.model;
 
 /**
  * This class represents a rectangle.
+ * @author Mohit Vijay Saini
+ * @see ShapeInterface
  */
 public class ShapeRectangle implements ShapeInterface {
 

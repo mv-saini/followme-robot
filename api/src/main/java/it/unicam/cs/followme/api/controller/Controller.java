@@ -23,6 +23,7 @@ import java.util.*;
  * This is the main controller class which takes input from view and send instructions to model.
  * @param <R> Robots that extends {@link RobotInterface}
  * @param <S> Shapes that extends {@link ShapeInterface}
+ * @author Mohit Vijay Saini
  */
 public class Controller<R extends RobotInterface<Direction>, S extends ShapeInterface> {
 
@@ -128,6 +129,7 @@ public class Controller<R extends RobotInterface<Direction>, S extends ShapeInte
             throws FollowMeParserException, IOException {
 
         this.environment = this.environmentLoader.getEnv(env, robotsGenerated);
+
     }
 
     /**
@@ -176,20 +178,8 @@ public class Controller<R extends RobotInterface<Direction>, S extends ShapeInte
         LoopProgramsInterface<R, S> loop = toMakeCopyOf.getNodeLoopType(i);
         String[] args = toMakeCopyOf.getNodeArgs(i);
 
-        if(loop != null){
-            copied.add(new Program<>(
-                    toMakeCopyOf.getNodeRobotCommand(i),
-                    args.clone(),
-                    loop.makeCopy()
-            ));
-        }
-        else{
-            copied.add(new Program<>(
-                    toMakeCopyOf.getNodeRobotCommand(i),
-                    args.clone(),
-                    null
-            ));
-        }
+        if(loop != null) copied.add(new Program<>(toMakeCopyOf.getNodeRobotCommand(i), args.clone(), loop.makeCopy()));
+        else copied.add(new Program<>(toMakeCopyOf.getNodeRobotCommand(i), args.clone(), null));
     }
 
     /**

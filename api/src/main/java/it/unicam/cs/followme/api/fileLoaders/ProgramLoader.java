@@ -17,6 +17,8 @@ import java.io.IOException;
  * This class loads the program file to be parsed.
  * @param <R> Robots that extends {@link RobotInterface}
  * @param <S> Shapes that extends {@link ShapeInterface}
+ * @author Mohit Vijay Saini
+ * @see ProgramLoaderInterface
  */
 public class ProgramLoader<R extends RobotInterface<Direction>, S extends ShapeInterface> implements ProgramLoaderInterface<R, S> {
 

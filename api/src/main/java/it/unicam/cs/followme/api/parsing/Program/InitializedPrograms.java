@@ -9,9 +9,11 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * This class contains robot at its own copy of the program and program counter.
+ * This class contains a robot and its own copy of the program and program counter.
  * @param <R> Robots that extends {@link RobotInterface}
  * @param <S> Shapes that extends {@link ShapeInterface}
+ * @author Mohit Vijay Saini
+ * @see InitializedProgramsInterface
  */
 public class InitializedPrograms<R extends RobotInterface<Direction>, S extends ShapeInterface>
         implements InitializedProgramsInterface<R, S> {
@@ -44,7 +46,7 @@ public class InitializedPrograms<R extends RobotInterface<Direction>, S extends 
 
     @Override
     public boolean terminated(){
-        return this.runningCounter < this.programList.size();
+        return this.runningCounter >= this.programList.size();
     }
 
     @Override
@@ -173,6 +175,7 @@ public class InitializedPrograms<R extends RobotInterface<Direction>, S extends 
      */
     private String proceedUtil(EnvironmentInterface<R,S> env, Direction direction){
         Coordinates current = env.getRobotCoords(this.robot);
+        this.robot.setDirection(direction);
         env.update(this.robot, new Coordinates(
                 current.getX() + (direction.getX() * direction.getSpeed()),
                 current.getY() + (direction.getY() * direction.getSpeed())

@@ -1,9 +1,12 @@
 package it.unicam.cs.followme.api.model;
 
 import java.text.DecimalFormat;
+import java.util.Objects;
 
 /**
  * This class represents a direction of the robot. It contains (x,y) coordinates and the speed of the robot in m/s.
+ * The reason Coordinates class was not used inside Direction because the (x,y) needs not to be final.
+ * @author Mohit Vijay Saini
  */
 public class Direction{
 
@@ -65,6 +68,14 @@ public class Direction{
      */
     public void setSpeed(double speed) {
         this.speed = speed;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Direction direction = (Direction) o;
+        return Double.compare(x, direction.x) == 0 && Double.compare(y, direction.y) == 0 && Double.compare(speed, direction.speed) == 0;
     }
 
     @Override

@@ -12,23 +12,24 @@ import java.util.Arrays;
  * This class represents the structure of a program.
  * @param <R> Robots that extends {@link RobotInterface}
  * @param <S> Shapes that extends {@link ShapeInterface}
+ * @author Mohit Vijay Saini
  */
 public class Program<R extends RobotInterface<Direction>, S extends ShapeInterface> {
 
     /**
      * Name of the program. enum -> {@link RobotCommand}
      */
-    private RobotCommand programLabel;
+    private final RobotCommand programLabel;
 
     /**
      * Arguments of the program.
      */
-    private String[] args;
+    private final String[] args;
 
     /**
      * Type of loop of the program.
      */
-    private LoopProgramsInterface<R, S> loopType;
+    private final LoopProgramsInterface<R, S> loopType;
 
     /**
      * Generates a new program.

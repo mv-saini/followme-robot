@@ -31,6 +31,8 @@ import java.util.*;
  * </ul>
  * @param <R> Robots that extends {@link RobotInterface}
  * @param <S> Shapes that extends {@link ShapeInterface}
+ * @author Mohit Vijay Saini
+ * @see FollowMeParserHandler
  */
 public class Handler<R extends RobotInterface<Direction>, S extends ShapeInterface> implements FollowMeParserHandler {
 

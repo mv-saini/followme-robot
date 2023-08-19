@@ -9,6 +9,7 @@ import it.unicam.cs.followme.api.model.ShapeInterface;
  * Any class that implements this interface can calculate the movement of the robot.
  * @param <R> Robots that extends {@link RobotInterface}
  * @param <S> Shapes that extends {@link ShapeInterface}
+ * @author Mohit Vijay Saini
  */
 public interface InitializedProgramsInterface<R extends RobotInterface<Direction>, S extends ShapeInterface> {
 

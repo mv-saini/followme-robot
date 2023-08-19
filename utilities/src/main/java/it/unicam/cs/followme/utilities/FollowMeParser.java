@@ -5,13 +5,15 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
 /**
  * Instances of this class are used to parse a program from an external source.
+ * <p>
+ * This class was provided by the Advanced Programming professor.
+ * @author Michele Loreti.
  */
 public final class FollowMeParser {
 
