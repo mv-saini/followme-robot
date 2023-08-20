@@ -26,7 +26,7 @@
             </buttons>
         </ButtonBar>
         <Pane fx:id="drawingArea" prefHeight="630.0" prefWidth="801.0" />
-      <Pane fx:id="emptyPane" prefHeight="89.0" prefWidth="149.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <Pane fx:id="stepsPane" prefHeight="89.0" prefWidth="149.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>
             <Label alignment="CENTER" layoutX="24.0" layoutY="14.0" prefHeight="17.0" prefWidth="104.0" text="Steps to execute" />
             <TextField fx:id="stepsText" layoutX="22.0" layoutY="45.0" prefHeight="25.0" prefWidth="104.0" text="1" />

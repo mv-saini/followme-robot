@@ -22,6 +22,7 @@ public class Direction{
 
     /**
      * Euclidean distance between the origin (0,0) and a point (x, y)
+     * d = √(x^2 + y^2)
      */
     private final double norm;
 

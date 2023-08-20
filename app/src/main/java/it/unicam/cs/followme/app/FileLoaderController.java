@@ -17,25 +17,51 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * This controller is responsible for the input of the files and robots.
+ */
 public class FileLoaderController {
 
+    /**
+     * Environment file.
+     */
     private File loadEnv;
 
+    /**
+     * Program File.
+     */
     private File loadProgram;
 
+    /**
+     * Text field where user inputs number of robots to spawn.
+     */
     @FXML
     private TextField robotField;
 
+    /**
+     * Calls a method to load the environment file with a title.
+     * @param actionEvent
+     */
     @FXML
     public void loadEnv(ActionEvent actionEvent) {
         loadEnv = loadFile("Choose an environment file", actionEvent);
     }
 
+    /**
+     * Calls a method to load the program file with a title.
+     * @param actionEvent
+     */
     @FXML
     public void LoadProgram(ActionEvent actionEvent) {
         loadProgram = loadFile("Choose a program file", actionEvent);
     }
 
+    /**
+     * Loads a file with a FileChooser.
+     * @param textLoader Title of the file chooser.
+     * @param actionEvent
+     * @return the file chosen by the user.
+     */
     private File loadFile(String textLoader, ActionEvent actionEvent) {
         FileChooser choose = new FileChooser();
         choose.setTitle(textLoader);
@@ -52,12 +78,23 @@ public class FileLoaderController {
         return choose.showOpenDialog(((Node) actionEvent.getSource()).getScene().getWindow());
     }
 
+    /**
+     * Loads the simulation stage with the user input.
+     * @param actionEvent
+     * @throws IOException
+     * @throws FollowMeParserException
+     */
     public void run(ActionEvent actionEvent) throws IOException, FollowMeParserException {
         //{
+
+        if(this.loadEnv == null || this.loadProgram == null) {
+            return;
+        }
 
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("scene.fxml"));
             Parent root = loader.load();
             SceneController sceneController = loader.getController();
+
             if(this.robotField.getText().isEmpty()) sceneController.parseFiles(loadEnv, loadProgram, 1);
             else sceneController.parseFiles(loadEnv, loadProgram, Integer.parseInt(robotField.getText()));
 
