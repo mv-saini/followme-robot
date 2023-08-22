@@ -1,11 +1,9 @@
-package it.unicam.cs.followme.api.fileLoaders;
+package it.unicam.cs.followme.api.parsing.fileLoaders;
 
 import it.unicam.cs.followme.api.model.Direction;
 import it.unicam.cs.followme.api.model.RobotInterface;
 import it.unicam.cs.followme.api.model.ShapeInterface;
-import it.unicam.cs.followme.api.parsing.loops.LoopProgramsInterface;
 import it.unicam.cs.followme.api.utility.LinkedPrograms;
-import it.unicam.cs.followme.api.utility.Program;
 import it.unicam.cs.followme.utilities.FollowMeParserException;
 
 import java.io.File;
@@ -18,7 +16,7 @@ import java.io.IOException;
  * @param <S> Shapes that extends {@link ShapeInterface}
  * @author Mohit Vijay Saini
  */
-public interface ProgramLoaderInterface<R extends RobotInterface<Direction>, S extends ShapeInterface>{
+public interface ProgramGeneratorInterface<R extends RobotInterface<Direction>, S extends ShapeInterface>{
 
     /**
      * Retrieves a linked list of program which is parsed by the parser from the given file.
@@ -27,6 +25,6 @@ public interface ProgramLoaderInterface<R extends RobotInterface<Direction>, S e
      * @throws FollowMeParserException
      * @throws IOException
      */
-    LinkedPrograms<R, S> getProgram(File prog) throws FollowMeParserException, IOException;
+    LinkedPrograms<R, S> generateProgram(File prog) throws FollowMeParserException, IOException;
 
 }

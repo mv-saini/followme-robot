@@ -1,10 +1,10 @@
 package it.unicam.cs.followme.api.controller;
 
 import it.unicam.cs.followme.api.execution.ExecuteProgram;
-import it.unicam.cs.followme.api.fileLoaders.EnvironmentLoader;
-import it.unicam.cs.followme.api.fileLoaders.EnvironmentLoaderInterface;
-import it.unicam.cs.followme.api.fileLoaders.ProgramLoader;
-import it.unicam.cs.followme.api.fileLoaders.ProgramLoaderInterface;
+import it.unicam.cs.followme.api.parsing.fileLoaders.EnvironmentGenerator;
+import it.unicam.cs.followme.api.parsing.fileLoaders.EnvironmentGeneratorInterface;
+import it.unicam.cs.followme.api.parsing.fileLoaders.ProgramGenerator;
+import it.unicam.cs.followme.api.parsing.fileLoaders.ProgramGeneratorInterface;
 import it.unicam.cs.followme.api.model.*;
 import it.unicam.cs.followme.api.parsing.files.Handler;
 import it.unicam.cs.followme.api.parsing.Program.InitializedPrograms;
@@ -12,6 +12,7 @@ import it.unicam.cs.followme.api.parsing.Program.InitializedProgramsInterface;
 import it.unicam.cs.followme.api.parsing.loops.*;
 import it.unicam.cs.followme.api.utility.LinkedPrograms;
 import it.unicam.cs.followme.api.utility.Program;
+import it.unicam.cs.followme.api.utility.ProgramCopier;
 import it.unicam.cs.followme.utilities.FollowMeParser;
 import it.unicam.cs.followme.utilities.FollowMeParserException;
 
@@ -35,12 +36,12 @@ public class Controller<R extends RobotInterface<Direction>, S extends ShapeInte
     /**
      * Environment file loader.
      */
-    private final EnvironmentLoaderInterface<R, S> environmentLoader;
+    private final EnvironmentGeneratorInterface<R, S> environmentLoader;
 
     /**
      * Program file loader.
      */
-    private final ProgramLoaderInterface<R, S> programLoader;
+    private final ProgramGeneratorInterface<R, S> programLoader;
 
     /**
      * List of copied programs for each robot.
@@ -62,7 +63,7 @@ public class Controller<R extends RobotInterface<Direction>, S extends ShapeInte
 
         FollowMeParser parser = new FollowMeParser(handler);
 
-        return new Controller<>(new EnvironmentLoader<>(parser), new ProgramLoader<>(handler, parser));
+        return new Controller<>(new EnvironmentGenerator<>(parser), new ProgramGenerator<>(handler, parser));
     }
 
     /**
@@ -70,7 +71,7 @@ public class Controller<R extends RobotInterface<Direction>, S extends ShapeInte
      * @param environmentLoader the environment file loader.
      * @param programLoader the program file loader.
      */
-    public Controller(EnvironmentLoaderInterface<R, S> environmentLoader, ProgramLoaderInterface<R, S> programLoader) {
+    public Controller(EnvironmentGeneratorInterface<R, S> environmentLoader, ProgramGeneratorInterface<R, S> programLoader) {
         this.environmentLoader = environmentLoader;
         this.environment = new Environment<>(new HashMap<>(), new HashMap<>());
         this.programLoader = programLoader;
@@ -90,15 +91,6 @@ public class Controller<R extends RobotInterface<Direction>, S extends ShapeInte
 
         loadEnvironment(env, robotsGenerated);
         loadProgram(prog);
-
-        System.out.println(this.environment.getRobots().size());
-        System.out.println(this.environment.getRobots());
-        System.out.println();
-        System.out.println(this.environment.getShapes().size());
-        System.out.println(this.environment.getShapes());
-        System.out.println();
-        System.out.println(this.initializedPrograms.size());
-        this.initializedPrograms.forEach(InitializedProgramsInterface::print);
     }
 
     /**
@@ -128,7 +120,7 @@ public class Controller<R extends RobotInterface<Direction>, S extends ShapeInte
     private void loadEnvironment(File env, Map<R, Coordinates> robotsGenerated)
             throws FollowMeParserException, IOException {
 
-        this.environment = this.environmentLoader.getEnv(env, robotsGenerated);
+        this.environment = this.environmentLoader.generateEnvironment(env, robotsGenerated);
 
     }
 
@@ -139,7 +131,7 @@ public class Controller<R extends RobotInterface<Direction>, S extends ShapeInte
      * @throws IOException
      */
     private void loadProgram(File prog) throws FollowMeParserException, IOException {
-        LinkedPrograms<R, S> programs = this.programLoader.getProgram(prog);
+        LinkedPrograms<R, S> programs = this.programLoader.generateProgram(prog);
         loadProgramEachRobot(this.environment.getRobots().keySet().stream().toList(), programs);
     }
 
@@ -149,37 +141,8 @@ public class Controller<R extends RobotInterface<Direction>, S extends ShapeInte
      * @param programs programs to be copied for each robot.
      */
     private void loadProgramEachRobot(List<R> robots, LinkedPrograms<R, S> programs){
-        robots.forEach(r -> this.initializedPrograms.add(new InitializedPrograms<>(makeCopy(programs), r)));
-    }
-
-    /**
-     * Copy each program.
-     * @param toMakeCopyOf the list to make a copy of.
-     * @return the copied linked list.
-     */
-    private LinkedPrograms<R, S> makeCopy(LinkedPrograms<R, S> toMakeCopyOf){
-
-        LinkedPrograms<R, S> copied = new LinkedPrograms<>();
-
-        for(int i = 0; i < toMakeCopyOf.size(); i++) addCopy(copied, toMakeCopyOf, i);
-
-        return copied;
-    }
-
-    /**
-     * Adds the copy a single program.
-     * @param copied the list containing the copied programs.
-     * @param toMakeCopyOf the list to make a copy of.
-     * @param i the program counter of the program to be copied.
-     */
-    private void addCopy(LinkedPrograms<R, S> copied,
-                         LinkedPrograms<R, S> toMakeCopyOf, int i){
-
-        LoopProgramsInterface<R, S> loop = toMakeCopyOf.getNodeLoopType(i);
-        String[] args = toMakeCopyOf.getNodeArgs(i);
-
-        if(loop != null) copied.add(new Program<>(toMakeCopyOf.getNodeRobotCommand(i), args.clone(), loop.makeCopy()));
-        else copied.add(new Program<>(toMakeCopyOf.getNodeRobotCommand(i), args.clone(), null));
+        ProgramCopier<R, S> programCopier = new ProgramCopier<>();
+        robots.forEach(r -> this.initializedPrograms.add(new InitializedPrograms<>(programCopier.makeCopy(programs), r)));
     }
 
     /**

@@ -1,7 +1,7 @@
 package it.unicam.cs.followme.api.model;
 
 /**
- * This class represents a simple coordinate made up of (x,y)
+ * This class represents a simple coordinate made up of (x,y).
  * @author Mohit Vijay Saini
  */
 public class Coordinates {

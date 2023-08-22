@@ -85,29 +85,20 @@ public class FileLoaderController {
      * @throws FollowMeParserException
      */
     public void run(ActionEvent actionEvent) throws IOException, FollowMeParserException {
-        //{
-
         if(this.loadEnv == null || this.loadProgram == null) {
             return;
         }
 
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("scene.fxml"));
-            Parent root = loader.load();
-            SceneController sceneController = loader.getController();
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("scene.fxml"));
+        Parent root = loader.load();
+        SceneController sceneController = loader.getController();
 
-            if(this.robotField.getText().isEmpty()) sceneController.parseFiles(loadEnv, loadProgram, 1);
-            else sceneController.parseFiles(loadEnv, loadProgram, Integer.parseInt(robotField.getText()));
+        if(this.robotField.getText().isEmpty()) sceneController.parseFiles(loadEnv, loadProgram, 1);
+        else sceneController.parseFiles(loadEnv, loadProgram, Integer.parseInt(robotField.getText()));
 
-            Stage stage = (Stage) (((Node)actionEvent.getSource()).getScene().getWindow());
-            stage.setScene(new Scene(root));
-            stage.setResizable(false);
-            stage.show();
-
-        /*}
-        catch (Exception e){
-            Alert a = new Alert(Alert.AlertType.ERROR);
-            a.setContentText(e.toString());
-            a.show();
-        }*/
+        Stage stage = (Stage) (((Node)actionEvent.getSource()).getScene().getWindow());
+        stage.setScene(new Scene(root));
+        stage.setResizable(false);
+        stage.show();
     }
 }

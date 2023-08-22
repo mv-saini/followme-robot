@@ -1,4 +1,4 @@
-package it.unicam.cs.followme.api.fileLoaders;
+package it.unicam.cs.followme.api.parsing.fileLoaders;
 
 import it.unicam.cs.followme.api.model.*;
 import it.unicam.cs.followme.utilities.FollowMeParserException;
@@ -13,7 +13,7 @@ import java.util.Map;
  * @param <S> Shapes that extends {@link ShapeInterface}
  * @author Mohit Vijay Saini
  */
-public interface EnvironmentLoaderInterface<R extends RobotInterface<Direction>, S extends ShapeInterface> {
+public interface EnvironmentGeneratorInterface<R extends RobotInterface<Direction>, S extends ShapeInterface> {
 
     /**
      * Retrieves an environment which is parsed by the parser from the given file and a map of robots generated with
@@ -24,6 +24,6 @@ public interface EnvironmentLoaderInterface<R extends RobotInterface<Direction>,
      * @throws FollowMeParserException
      * @throws IOException
      */
-    EnvironmentInterface<R, S> getEnv(File env, Map<R, Coordinates> robots) throws FollowMeParserException, IOException;
+    EnvironmentInterface<R, S> generateEnvironment(File env, Map<R, Coordinates> robots) throws FollowMeParserException, IOException;
 
 }

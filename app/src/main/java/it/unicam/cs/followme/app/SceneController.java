@@ -116,20 +116,6 @@ public class SceneController implements Initializable {
         setZoomScroll();
         this.buttonBar.toFront();
         this.logger.toFront();
-        /*try {
-            parseFiles(
-                    new File("C:\\Users\\snamv\\Desktop\\followme-robot\\app\\src\\main\\resources\\testEnv.txt"),
-                    new File("C:\\Users\\snamv\\Desktop\\followme-robot\\app\\src\\main\\resources\\testProg.txt"),
-                    1
-            );
-        } catch (FollowMeParserException | IOException e) {
-            //throw new RuntimeException(e);
-        }*/
-        /*Set<RobotInterface<Direction>> s = this.controller.getEnvironment().getRobots().keySet();
-        s.forEach(r -> this.controller.getEnvironment().getRobots().get(r).setxy(
-                new Coordinates(1,1)
-        ));*/
-
     }
 
     /**
@@ -293,8 +279,7 @@ public class SceneController implements Initializable {
      */
     private void drawRobots(){
         this.controller.getEnvironment().getRobots().forEach((key, value) -> {
-            System.out.println(key + " "+ value);
-            Coordinates scaled = value.addCoordinates(center.addCoordinates(offset));
+            Coordinates scaled = new Coordinates(value.getX(), value.getY() * -1).addCoordinates(center.addCoordinates(offset));
 
             Circle c = new Circle(scaled.getX() * this.zoomLevel, scaled.getY() * this.zoomLevel,
                     robotSize * this.zoomLevel, Color.BLACK);

@@ -1,11 +1,9 @@
-package it.unicam.cs.followme.api.fileLoaders;
+package it.unicam.cs.followme.api.parsing.fileLoaders;
 
 import it.unicam.cs.followme.api.model.Direction;
 import it.unicam.cs.followme.api.model.RobotInterface;
 import it.unicam.cs.followme.api.model.ShapeInterface;
 import it.unicam.cs.followme.api.parsing.files.Handler;
-import it.unicam.cs.followme.api.parsing.loops.LoopProgramsInterface;
-import it.unicam.cs.followme.api.utility.Program;
 import it.unicam.cs.followme.utilities.FollowMeParser;
 import it.unicam.cs.followme.utilities.FollowMeParserException;
 import it.unicam.cs.followme.api.utility.LinkedPrograms;
@@ -18,9 +16,9 @@ import java.io.IOException;
  * @param <R> Robots that extends {@link RobotInterface}
  * @param <S> Shapes that extends {@link ShapeInterface}
  * @author Mohit Vijay Saini
- * @see ProgramLoaderInterface
+ * @see ProgramGeneratorInterface
  */
-public class ProgramLoader<R extends RobotInterface<Direction>, S extends ShapeInterface> implements ProgramLoaderInterface<R, S> {
+public class ProgramGenerator<R extends RobotInterface<Direction>, S extends ShapeInterface> implements ProgramGeneratorInterface<R, S> {
 
     /**
      * The handler which will retrieve the parsed list.
@@ -37,13 +35,13 @@ public class ProgramLoader<R extends RobotInterface<Direction>, S extends ShapeI
      * @param handler handler which will retrieve the list of parsed programs.
      * @param parser parser which will parse the program file.
      */
-    public ProgramLoader(Handler<R, S> handler, FollowMeParser parser) {
+    public ProgramGenerator(Handler<R, S> handler, FollowMeParser parser) {
         this.handler = handler;
         this.parser = parser;
     }
 
     @Override
-    public LinkedPrograms<R, S> getProgram(File prog) throws FollowMeParserException, IOException {
+    public LinkedPrograms<R, S> generateProgram(File prog) throws FollowMeParserException, IOException {
         this.parser.parseRobotProgram(prog);
         return this.handler.getProgramList();
     }

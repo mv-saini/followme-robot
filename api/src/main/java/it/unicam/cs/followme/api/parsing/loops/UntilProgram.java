@@ -31,7 +31,6 @@ public final class UntilProgram<R extends RobotInterface<Direction>, S extends S
 
     @Override
     public boolean conditionSatisfied(EnvironmentInterface<R, S> env, R robot) {
-        System.out.println(env.robotInsideShapes(robot).contains(this.label));
         return env.robotInsideShapes(robot).contains(this.label);
     }
 

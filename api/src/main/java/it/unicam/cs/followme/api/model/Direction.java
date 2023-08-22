@@ -21,8 +21,9 @@ public class Direction{
     private double y;
 
     /**
-     * Euclidean distance between the origin (0,0) and a point (x, y)
+     * Euclidean distance between the origin (0,0) and a point (x, y).
      * d = √(x^2 + y^2)
+     * This represents the magnitude to normalize the (x,y) while maintaining the same direction.
      */
     private final double norm;
 

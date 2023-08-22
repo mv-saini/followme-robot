@@ -111,7 +111,6 @@ public class InitializedPrograms<R extends RobotInterface<Direction>, S extends 
      * @return a message informing what was executed.
      */
     private String executeLoop(RobotCommand programLabel, EnvironmentInterface<R, S> env) {
-        System.out.println(programLabel);
         switch (programLabel){
             case UNTIL -> {
                 return untilLoop(env, this.programList.getNodeLoopType(this.runningCounter));
@@ -218,6 +217,7 @@ public class InitializedPrograms<R extends RobotInterface<Direction>, S extends 
      * @return a message informing that the robot has stopped signalling the given label.
      */
     private String unsignal(EnvironmentInterface<R,S> env, String[] args) {
+        System.out.println("YO WHATS UP");
         if(this.robot.getLabel().equals(args[0])) this.robot.resetLabel();
         env.update(this.robot, env.getRobotCoords(robot));
         this.runningCounter++;

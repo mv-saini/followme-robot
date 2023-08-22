@@ -24,11 +24,6 @@ public class Environment<R extends RobotInterface<Direction>, S extends ShapeInt
 
     public Environment(Map<R, Coordinates> robots, Map<S, Coordinates> shapes) {
         if(robots == null || shapes == null) throw new IllegalArgumentException("Robots or Shapes are null");
-
-        R r = (R) new Robot<>(new Direction(10, 10, 10));
-        Coordinates c = new Coordinates(0,0);
-        robots.put(r, c);
-
         this.robots = robots;
         this.shapes = shapes;
     }

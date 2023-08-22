@@ -1,4 +1,4 @@
-package it.unicam.cs.followme.api.fileLoaders;
+package it.unicam.cs.followme.api.parsing.fileLoaders;
 
 import it.unicam.cs.followme.api.model.*;
 import it.unicam.cs.followme.api.parsing.files.ShapeParser;
@@ -14,9 +14,9 @@ import java.util.Map;
  * This class loads the environment file to be parsed.
  * @param <R> Robots that extends {@link RobotInterface}
  * @author Mohit Vijay Saini
- * @see EnvironmentLoaderInterface
+ * @see EnvironmentGeneratorInterface
  */
-public class EnvironmentLoader<R extends RobotInterface<Direction>> implements EnvironmentLoaderInterface<R, ShapeInterface> {
+public class EnvironmentGenerator<R extends RobotInterface<Direction>> implements EnvironmentGeneratorInterface<R, ShapeInterface> {
 
     /**
      * Parser which will parse the environment file.
@@ -32,13 +32,13 @@ public class EnvironmentLoader<R extends RobotInterface<Direction>> implements E
      * Generates the environment file loader.
      * @param parser parser which will be used to parse the file.
      */
-    public EnvironmentLoader(FollowMeParser parser) {
+    public EnvironmentGenerator(FollowMeParser parser) {
         this.parser = parser;
         this.shapeParser = new ShapeParser();
     }
 
     @Override
-    public EnvironmentInterface<R, ShapeInterface> getEnv(File env, Map<R, Coordinates> robots) throws FollowMeParserException, IOException {
+    public EnvironmentInterface<R, ShapeInterface> generateEnvironment(File env, Map<R, Coordinates> robots) throws FollowMeParserException, IOException {
         return new Environment<>(robots, shapeParser.parseShapes(this.parser.parseEnvironment(env)));
     }
 }

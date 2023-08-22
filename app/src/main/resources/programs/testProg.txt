@@ -1,13 +1,13 @@
 DO FOREVER
 UNTIL C1
     UNTIL C1
-        MOVE 100 0 50
+        MOVE 0 100 50
     DONE
     SIGNAL C1
 DONE
 UNTIL R1
     UNTIL R1
-        MOVE -100 0.0 50.0
+        MOVE 0 -100 50.0
     DONE
     SIGNAL R1
 DONE

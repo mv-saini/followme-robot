@@ -12,7 +12,7 @@ import it.unicam.cs.followme.api.model.ShapeInterface;
  * @author Mohit Vijay Saini
  * @see LoopProgramsInterface
  */
-public class DoneProgram<R extends RobotInterface<Direction>, S extends ShapeInterface> implements LoopProgramsInterface<R, S> {
+public final class DoneProgram<R extends RobotInterface<Direction>, S extends ShapeInterface> implements LoopProgramsInterface<R, S> {
 
     /**
      * Program counter to jump to.
