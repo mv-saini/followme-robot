@@ -123,7 +123,7 @@ public class LinkedPrograms<R extends RobotInterface<Direction>, S extends Shape
         Node<R, S> it = getNode(index);
         if(it == null)
             return null;
-        return it.data.getProgramLabel();
+        return it.data.programLabel();
     }
 
     /**
@@ -135,7 +135,7 @@ public class LinkedPrograms<R extends RobotInterface<Direction>, S extends Shape
         Node<R, S> it = getNode(index);
         if(it == null)
             return null;
-        return it.data.getArgs();
+        return it.data.args();
     }
 
     /**
@@ -147,7 +147,7 @@ public class LinkedPrograms<R extends RobotInterface<Direction>, S extends Shape
         Node<R, S> it = getNode(index);
         if(it == null)
             return null;
-        return it.data.getLoopType();
+        return it.data.loopType();
     }
 
 

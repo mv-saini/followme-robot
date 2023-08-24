@@ -53,7 +53,7 @@ public class Environment<R extends RobotInterface<Direction>, S extends ShapeInt
         if(c1 == null || c2 == null)
             throw new IllegalArgumentException("One of two coordinates provided were null.");
 
-        return Math.sqrt(Math.pow(c1.getX() - c2.getX(), 2) + Math.pow(c1.getY() - c2.getY(), 2));
+        return Math.sqrt(Math.pow(c1.x() - c2.x(), 2) + Math.pow(c1.y() - c2.y(), 2));
     }
 
     @Override
@@ -62,8 +62,8 @@ public class Environment<R extends RobotInterface<Direction>, S extends ShapeInt
             throw new IllegalArgumentException("List is empty.");
 
         return new Coordinates(
-                avgOf.stream().collect(Collectors.averagingDouble(Coordinates::getX)),
-                avgOf.stream().collect(Collectors.averagingDouble(Coordinates::getY))
+                avgOf.stream().collect(Collectors.averagingDouble(Coordinates::x)),
+                avgOf.stream().collect(Collectors.averagingDouble(Coordinates::y))
         );
     }
 
@@ -80,7 +80,7 @@ public class Environment<R extends RobotInterface<Direction>, S extends ShapeInt
         return this.shapes.entrySet().stream()
                 .filter(entry -> entry.getKey().insideArea(this.robots.get(robot), entry.getValue()))
                 .map(Map.Entry::getKey)
-                .map(ShapeInterface::getLabel)
+                .map(ShapeInterface::label)
                 .collect(Collectors.toSet());
     }
 

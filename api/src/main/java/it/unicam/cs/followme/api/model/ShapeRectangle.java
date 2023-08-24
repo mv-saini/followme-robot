@@ -2,60 +2,45 @@ package it.unicam.cs.followme.api.model;
 
 /**
  * This class represents a rectangle.
+ *
+ * @param width  Width of the rectangle.
+ * @param height Height of the rectangle.
+ * @param label  Name of the rectangle.
  * @author Mohit Vijay Saini
  * @see ShapeInterface
  */
-public class ShapeRectangle implements ShapeInterface {
+public record ShapeRectangle(double width, double height, String label) implements ShapeInterface {
 
-    /**
-     * Width of the rectangle.
-     */
-    private final double width;
-
-    /**
-     * Height of the rectangle.
-     */
-    private final double height;
-
-    /**
-     * Name of the rectangle.
-     */
-    private final String label;
-
-    public ShapeRectangle(double width, double height, String label) {
+    public ShapeRectangle {
         if (width < 0 || height < 0) throw new IllegalArgumentException("Negative width or height");
-        this.width = width;
-        this.height = height;
-        this.label = label;
-    }
-
-    @Override
-    public String getLabel() {
-        return label;
     }
 
     @Override
     public boolean insideArea(Coordinates c, Coordinates centerShape) {
-        double x_tl = centerShape.getX() - (width / 2);
-        double y_tl = centerShape.getY() - (height / 2);
-        double x_br = centerShape.getX()  + (width / 2);
-        double y_br = centerShape.getY() + (height / 2);
-        return c.getX()  >= x_tl && c.getX()  <= x_br && c.getY() >= y_tl && c.getY() <= y_br;
+        double x_tl = centerShape.x() - (width / 2);
+        double y_tl = centerShape.y() - (height / 2);
+        double x_br = centerShape.x() + (width / 2);
+        double y_br = centerShape.y() + (height / 2);
+        return c.x() >= x_tl && c.x() <= x_br && c.y() >= y_tl && c.y() <= y_br;
     }
 
     /**
      * Retrieves the width of the rectangle.
+     *
      * @return the width of the rectangle.
      */
-    public double getWidth() {
+    @Override
+    public double width() {
         return width;
     }
 
     /**
      * Retrieves the height of the rectangle.
+     *
      * @return the height of the rectangle.
      */
-    public double getHeight() {
+    @Override
+    public double height() {
         return height;
     }
 

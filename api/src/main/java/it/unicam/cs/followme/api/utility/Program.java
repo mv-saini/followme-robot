@@ -10,60 +10,56 @@ import java.util.Arrays;
 
 /**
  * This class represents the structure of a program.
- * @param <R> Robots that extends {@link RobotInterface}
- * @param <S> Shapes that extends {@link ShapeInterface}
+ *
+ * @param <R>          Robots that extends {@link RobotInterface}
+ * @param <S>          Shapes that extends {@link ShapeInterface}
+ * @param programLabel Name of the program. enum -> {@link RobotCommand}
+ * @param args         Arguments of the program.
+ * @param loopType     Type of loop of the program.
  * @author Mohit Vijay Saini
  */
-public class Program<R extends RobotInterface<Direction>, S extends ShapeInterface> {
-
-    /**
-     * Name of the program. enum -> {@link RobotCommand}
-     */
-    private final RobotCommand programLabel;
-
-    /**
-     * Arguments of the program.
-     */
-    private final String[] args;
-
-    /**
-     * Type of loop of the program.
-     */
-    private final LoopProgramsInterface<R, S> loopType;
+public record Program<R extends RobotInterface<Direction>, S extends ShapeInterface>(RobotCommand programLabel,
+                                                                                     String[] args,
+                                                                                     LoopProgramsInterface<R, S> loopType) {
 
     /**
      * Generates a new program.
+     *
      * @param programLabel name of the program.
-     * @param args arguments of the program.
-     * @param loopType loop type of the program.
+     * @param args         arguments of the program.
+     * @param loopType     loop type of the program.
      */
-    public Program(RobotCommand programLabel, String[] args, LoopProgramsInterface<R, S> loopType) {
-        this.programLabel = programLabel;
-        this.args = args;
-        this.loopType = loopType;
+    public Program {
+        if(programLabel == null) throw new IllegalArgumentException("Robot command can't be null");
     }
 
     /**
      * Retrieves the name of the program.
+     *
      * @return the name of the program.
      */
-    public RobotCommand getProgramLabel() {
+    @Override
+    public RobotCommand programLabel() {
         return programLabel;
     }
 
     /**
      * Retrieves the arguments of the program.
+     *
      * @return the arguments of the program.
      */
-    public String[] getArgs() {
+    @Override
+    public String[] args() {
         return args;
     }
 
     /**
      * Retrieves the loop type of the program.
+     *
      * @return the loop type of the program.
      */
-    public LoopProgramsInterface<R, S> getLoopType() {
+    @Override
+    public LoopProgramsInterface<R, S> loopType() {
         return loopType;
     }
 

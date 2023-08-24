@@ -2,45 +2,32 @@ package it.unicam.cs.followme.api.model;
 
 /**
  * This class represents a circle.
+ *
+ * @param radius Radius of the circle.
+ * @param label  Name of the circle.
  * @author Mohit Vijay Saini
  * @see ShapeInterface
  */
-public class ShapeCircle implements ShapeInterface {
+public record ShapeCircle(double radius, String label) implements ShapeInterface {
 
-    /**
-     * Radius of the circle.
-     */
-    private final double radius;
-
-    /**
-     * Name of the circle.
-     */
-    private final String label;
-
-
-    public ShapeCircle(double radius, String label) {
+    public ShapeCircle {
         if (radius < 0) throw new IllegalArgumentException("Negative radius");
-        this.radius = radius;
-        this.label = label;
-    }
-
-    @Override
-    public String getLabel() {
-        return label;
     }
 
     @Override
     public boolean insideArea(Coordinates c, Coordinates centerShape) {
         //(x - h)² + (y - k)² ≤ r²
-        double distance = Math.sqrt(Math.pow(c.getX() - centerShape.getX(), 2) + Math.pow(c.getY() - centerShape.getY(), 2));
+        double distance = Math.sqrt(Math.pow(c.x() - centerShape.x(), 2) + Math.pow(c.y() - centerShape.y(), 2));
         return distance <= radius;
     }
 
     /**
      * Retrieves the radius of the circle.
+     *
      * @return the radius of the circle.
      */
-    public double getRadius() {
+    @Override
+    public double radius() {
         return radius;
     }
 

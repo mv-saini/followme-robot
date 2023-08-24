@@ -2,49 +2,42 @@ package it.unicam.cs.followme.api.model;
 
 /**
  * This class represents a simple coordinate made up of (x,y).
+ *
+ * @param x The x value of the coordinate.
+ * @param y The y value of the coordinate.
  * @author Mohit Vijay Saini
  */
-public class Coordinates {
+public record Coordinates(double x, double y) {
 
     /**
      * The x value of the coordinate.
-     */
-    private final double x;
-
-    /**
-     * The y value of the coordinate.
-     */
-    private final double y;
-
-    public Coordinates(double x, double y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    /**
-     * The x value of the coordinate.
+     *
      * @return the x value.
      */
-    public double getX() {
+    @Override
+    public double x() {
         return x;
     }
 
     /**
      * The y value of the coordinate.
+     *
      * @return the y value.
      */
-    public double getY() {
+    @Override
+    public double y() {
         return y;
     }
 
     /**
      * Adds the given coordinate x and y values to the values of this coordinate.
+     *
      * @param toAdd coordinate to add.
      * @return the added coordinate.
      */
-    public Coordinates addCoordinates(Coordinates toAdd){
-        return new Coordinates(this.x + toAdd.getX(),
-                this.y + toAdd.getY());
+    public Coordinates addCoordinates(Coordinates toAdd) {
+        return new Coordinates(this.x + toAdd.x(),
+                this.y + toAdd.y());
     }
 
     @Override

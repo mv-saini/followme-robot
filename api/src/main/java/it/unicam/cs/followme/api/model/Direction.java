@@ -13,12 +13,12 @@ public class Direction{
     /**
      * The x value of the direction.
      */
-    private double x;
+    private final double x;
 
     /**
      * The y value of the direction.
      */
-    private double y;
+    private final double y;
 
     /**
      * Euclidean distance between the origin (0,0) and a point (x, y).

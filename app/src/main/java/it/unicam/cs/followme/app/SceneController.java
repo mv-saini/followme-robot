@@ -279,9 +279,9 @@ public class SceneController implements Initializable {
      */
     private void drawRobots(){
         this.controller.getEnvironment().getRobots().forEach((key, value) -> {
-            Coordinates scaled = new Coordinates(value.getX(), value.getY() * -1).addCoordinates(center.addCoordinates(offset));
+            Coordinates scaled = new Coordinates(value.x(), value.y() * -1).addCoordinates(center.addCoordinates(offset));
 
-            Circle c = new Circle(scaled.getX() * this.zoomLevel, scaled.getY() * this.zoomLevel,
+            Circle c = new Circle(scaled.x() * this.zoomLevel, scaled.y() * this.zoomLevel,
                     robotSize * this.zoomLevel, Color.BLACK);
 
             contentGroup.getChildren().add(c);
@@ -310,14 +310,14 @@ public class SceneController implements Initializable {
      */
     private void drawRectangle(Coordinates value, ShapeRectangle rectangle) {
         //scales the coordinates according to the offset and the center.
-        Coordinates scaled = new Coordinates(value.getX(), value.getY() * -1).addCoordinates(center.addCoordinates(offset));
+        Coordinates scaled = new Coordinates(value.x(), value.y() * -1).addCoordinates(center.addCoordinates(offset));
 
         //coordinates of the top left corner of the rectangle.
-        double x_tl = scaled.getX() - (rectangle.getWidth() / 2);
-        double y_tl = scaled.getY() - (rectangle.getHeight() / 2);
+        double x_tl = scaled.x() - (rectangle.width() / 2);
+        double y_tl = scaled.y() - (rectangle.height() / 2);
 
         Rectangle r = new Rectangle(x_tl * this.zoomLevel, y_tl * this.zoomLevel,
-                rectangle.getWidth() * this.zoomLevel, rectangle.getHeight() * this.zoomLevel);
+                rectangle.width() * this.zoomLevel, rectangle.height() * this.zoomLevel);
         r.setFill(javafx.scene.paint.Color.BLUE);
 
         loggerList.add("Added a rectangle");
@@ -332,10 +332,10 @@ public class SceneController implements Initializable {
      */
     private void drawCircle(Coordinates value, ShapeCircle circle) {
         //scales the coordinates according to the offset and the center.
-        Coordinates scaled = new Coordinates(value.getX(), value.getY() * -1).addCoordinates(center.addCoordinates(offset));
+        Coordinates scaled = new Coordinates(value.x(), value.y() * -1).addCoordinates(center.addCoordinates(offset));
 
-        Circle c = new Circle(scaled.getX() * this.zoomLevel, scaled.getY() * this.zoomLevel,
-                circle.getRadius() * this.zoomLevel, javafx.scene.paint.Color.RED);
+        Circle c = new Circle(scaled.x() * this.zoomLevel, scaled.y() * this.zoomLevel,
+                circle.radius() * this.zoomLevel, javafx.scene.paint.Color.RED);
 
         loggerList.add("Added a circle");
 

@@ -41,9 +41,9 @@ class InitializedProgramsTest {
 
         i.executeNext(e);
 
-        assertEquals("12.07", new DecimalFormat("#.00").format(e.getRobotCoords(r).getX()));
+        assertEquals("12.07", new DecimalFormat("#.00").format(e.getRobotCoords(r).x()));
 
-        assertEquals("8.07", new DecimalFormat("#.00").format(e.getRobotCoords(r).getY()));
+        assertEquals("8.07", new DecimalFormat("#.00").format(e.getRobotCoords(r).y()));
 
         assertTrue(r.getDirection().equals(new Direction(5, 5, 10)));
 

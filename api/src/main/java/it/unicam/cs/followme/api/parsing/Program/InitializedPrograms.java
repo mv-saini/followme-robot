@@ -160,8 +160,8 @@ public class InitializedPrograms<R extends RobotInterface<Direction>, S extends 
         Coordinates current = env.getRobotCoords(this.robot);
         this.robot.setDirection(direction);
         env.update(this.robot, new Coordinates(
-                current.getX() + (direction.getX() * direction.getSpeed()),
-                current.getY() + (direction.getY() * direction.getSpeed())
+                current.x() + (direction.getX() * direction.getSpeed()),
+                current.y() + (direction.getY() * direction.getSpeed())
         ));
         this.runningCounter++;
         return "Moved a robot towards " + direction;
@@ -221,7 +221,7 @@ public class InitializedPrograms<R extends RobotInterface<Direction>, S extends 
                 .collect(Collectors.toCollection(LinkedList::new));
         Coordinates avg = env.averageOf(avgOf);
         if(!avgOf.isEmpty())
-            return proceedSpecific(env, new String[]{String.valueOf(avg.getX()), String.valueOf(avg.getY()), args[2]});
+            return proceedSpecific(env, new String[]{String.valueOf(avg.x()), String.valueOf(avg.y()), args[2]});
         else
             return proceedRandom(env, new String[]{
                     String.valueOf(Double.parseDouble(args[1]) * -1), args[1],
