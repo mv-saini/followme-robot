@@ -70,8 +70,8 @@ class EnvironmentTest {
         list.add(new Coordinates(5, -3));
         list.add(new Coordinates(8, -5));
         list.add(new Coordinates(-6, 8));
-        assertEquals(expected.x(), env.averageOf(list).x());
-        assertEquals(expected.y(), env.averageOf(list).y());
+        assertEquals(expected.getX(), env.averageOf(list).getX());
+        assertEquals(expected.getY(), env.averageOf(list).getY());
     }
 
     @Test

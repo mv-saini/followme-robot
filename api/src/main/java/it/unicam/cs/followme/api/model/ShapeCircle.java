@@ -1,23 +1,30 @@
 package it.unicam.cs.followme.api.model;
 
+import java.util.Objects;
+
 /**
  * This class represents a circle.
  *
- * @param radius Radius of the circle.
- * @param label  Name of the circle.
  * @author Mohit Vijay Saini
  * @see ShapeInterface
  */
-public record ShapeCircle(double radius, String label) implements ShapeInterface {
+public final class ShapeCircle implements ShapeInterface {
 
-    public ShapeCircle {
+    private final double radius;
+
+    private final String label;
+
+
+    public ShapeCircle(double radius, String label) {
         if (radius < 0) throw new IllegalArgumentException("Negative radius");
+        this.radius = radius;
+        this.label = label;
     }
 
     @Override
     public boolean insideArea(Coordinates c, Coordinates centerShape) {
         //(x - h)² + (y - k)² ≤ r²
-        double distance = Math.sqrt(Math.pow(c.x() - centerShape.x(), 2) + Math.pow(c.y() - centerShape.y(), 2));
+        double distance = Math.sqrt(Math.pow(c.getX() - centerShape.getX(), 2) + Math.pow(c.getY() - centerShape.getY(), 2));
         return distance <= radius;
     }
 
@@ -26,8 +33,7 @@ public record ShapeCircle(double radius, String label) implements ShapeInterface
      *
      * @return the radius of the circle.
      */
-    @Override
-    public double radius() {
+    public double getRadius() {
         return radius;
     }
 
@@ -38,4 +44,24 @@ public record ShapeCircle(double radius, String label) implements ShapeInterface
                 ", label='" + label + '\'' +
                 '}';
     }
+
+    @Override
+    public String getLabel() {
+        return label;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) return true;
+        if (obj == null || obj.getClass() != this.getClass()) return false;
+        var that = (ShapeCircle) obj;
+        return Double.doubleToLongBits(this.radius) == Double.doubleToLongBits(that.radius) &&
+                Objects.equals(this.label, that.label);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(radius, label);
+    }
+
 }

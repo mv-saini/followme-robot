@@ -1,4 +1,4 @@
-package it.unicam.cs.followme.api.parsing.Program;
+package it.unicam.cs.followme.api.execution.Program;
 
 import it.unicam.cs.followme.api.utility.LinkedPrograms;
 import it.unicam.cs.followme.api.parsing.loops.LoopProgramsInterface;
@@ -9,7 +9,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * This class contains a robot and its own copy of the program and program counter.
+ * This class contains a robot and its own copy of the program and program counter and is responsible for calculating
+ * the movement/behavior of robot.
  * @param <R> Robots that extends {@link RobotInterface}
  * @param <S> Shapes that extends {@link ShapeInterface}
  * @author Mohit Vijay Saini
@@ -56,16 +57,16 @@ public class InitializedPrograms<R extends RobotInterface<Direction>, S extends 
         RobotCommand robotCommand = this.programList.getNodeRobotCommand(this.runningCounter);
 
         if(this.programList.getNodeLoopType(this.runningCounter) != null) return executeLoop(robotCommand, env);
-        else return executeBasic(robotCommand, env);
+        else return executeProgram(robotCommand, env);
     }
 
     /**
-     * Calculates the movement of the robot.
+     * Calculates the movement or updates the signal     of the robot.
      * @param programLabel the program name.
      * @param env the environment that is affected.
      * @return a message informing what was executed.
      */
-    private String executeBasic(RobotCommand programLabel, EnvironmentInterface<R,S> env) {
+    private String executeProgram(RobotCommand programLabel, EnvironmentInterface<R,S> env) {
         switch (programLabel){
             case MOVE -> {
                 return proceed(env, this.programList.getNodeArgs(this.runningCounter));
@@ -160,8 +161,8 @@ public class InitializedPrograms<R extends RobotInterface<Direction>, S extends 
         Coordinates current = env.getRobotCoords(this.robot);
         this.robot.setDirection(direction);
         env.update(this.robot, new Coordinates(
-                current.x() + (direction.getX() * direction.getSpeed()),
-                current.y() + (direction.getY() * direction.getSpeed())
+                current.getX() + (direction.getX() * direction.getSpeed()),
+                current.getY() + (direction.getY() * direction.getSpeed())
         ));
         this.runningCounter++;
         return "Moved a robot towards " + direction;
@@ -221,7 +222,7 @@ public class InitializedPrograms<R extends RobotInterface<Direction>, S extends 
                 .collect(Collectors.toCollection(LinkedList::new));
         Coordinates avg = env.averageOf(avgOf);
         if(!avgOf.isEmpty())
-            return proceedSpecific(env, new String[]{String.valueOf(avg.x()), String.valueOf(avg.y()), args[2]});
+            return proceedSpecific(env, new String[]{String.valueOf(avg.getX()), String.valueOf(avg.getY()), args[2]});
         else
             return proceedRandom(env, new String[]{
                     String.valueOf(Double.parseDouble(args[1]) * -1), args[1],

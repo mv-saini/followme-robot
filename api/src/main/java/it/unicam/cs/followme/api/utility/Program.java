@@ -7,20 +7,21 @@ import it.unicam.cs.followme.api.parsing.loops.LoopProgramsInterface;
 import it.unicam.cs.followme.utilities.RobotCommand;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * This class represents the structure of a program.
  *
- * @param <R>          Robots that extends {@link RobotInterface}
- * @param <S>          Shapes that extends {@link ShapeInterface}
- * @param programLabel Name of the program. enum -> {@link RobotCommand}
- * @param args         Arguments of the program.
- * @param loopType     Type of loop of the program.
  * @author Mohit Vijay Saini
  */
-public record Program<R extends RobotInterface<Direction>, S extends ShapeInterface>(RobotCommand programLabel,
-                                                                                     String[] args,
-                                                                                     LoopProgramsInterface<R, S> loopType) {
+public final class Program<R extends RobotInterface<Direction>, S extends ShapeInterface> {
+
+    private final RobotCommand programLabel;
+
+    private final String[] args;
+
+    private final LoopProgramsInterface<R, S> loopType;
+
 
     /**
      * Generates a new program.
@@ -29,8 +30,11 @@ public record Program<R extends RobotInterface<Direction>, S extends ShapeInterf
      * @param args         arguments of the program.
      * @param loopType     loop type of the program.
      */
-    public Program {
-        if(programLabel == null) throw new IllegalArgumentException("Robot command can't be null");
+    public Program(RobotCommand programLabel, String[] args, LoopProgramsInterface<R, S> loopType) {
+        if (programLabel == null) throw new IllegalArgumentException("Robot command can't be null");
+        this.programLabel = programLabel;
+        this.args = args;
+        this.loopType = loopType;
     }
 
     /**
@@ -38,8 +42,7 @@ public record Program<R extends RobotInterface<Direction>, S extends ShapeInterf
      *
      * @return the name of the program.
      */
-    @Override
-    public RobotCommand programLabel() {
+    public RobotCommand getProgramLabel() {
         return programLabel;
     }
 
@@ -48,8 +51,7 @@ public record Program<R extends RobotInterface<Direction>, S extends ShapeInterf
      *
      * @return the arguments of the program.
      */
-    @Override
-    public String[] args() {
+    public String[] getArgs() {
         return args;
     }
 
@@ -58,8 +60,7 @@ public record Program<R extends RobotInterface<Direction>, S extends ShapeInterf
      *
      * @return the loop type of the program.
      */
-    @Override
-    public LoopProgramsInterface<R, S> loopType() {
+    public LoopProgramsInterface<R, S> getLoopType() {
         return loopType;
     }
 
@@ -70,5 +71,20 @@ public record Program<R extends RobotInterface<Direction>, S extends ShapeInterf
                 ", args=" + Arrays.toString(args) +
                 ", loopType=" + loopType +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Program<?, ?> program = (Program<?, ?>) o;
+        return programLabel == program.programLabel && Arrays.equals(args, program.args) && Objects.equals(loopType, program.loopType);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(programLabel, loopType);
+        result = 31 * result + Arrays.hashCode(args);
+        return result;
     }
 }

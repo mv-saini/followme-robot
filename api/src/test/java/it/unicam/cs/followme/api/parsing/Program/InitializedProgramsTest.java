@@ -1,5 +1,7 @@
 package it.unicam.cs.followme.api.parsing.Program;
 
+import it.unicam.cs.followme.api.execution.Program.InitializedPrograms;
+import it.unicam.cs.followme.api.execution.Program.InitializedProgramsInterface;
 import it.unicam.cs.followme.api.model.*;
 import it.unicam.cs.followme.api.parsing.files.Handler;
 import it.unicam.cs.followme.utilities.FollowMeParser;
@@ -41,9 +43,9 @@ class InitializedProgramsTest {
 
         i.executeNext(e);
 
-        assertEquals("12.07", new DecimalFormat("#.00").format(e.getRobotCoords(r).x()));
+        assertEquals("12.07", new DecimalFormat("#.00").format(e.getRobotCoords(r).getX()));
 
-        assertEquals("8.07", new DecimalFormat("#.00").format(e.getRobotCoords(r).y()));
+        assertEquals("8.07", new DecimalFormat("#.00").format(e.getRobotCoords(r).getY()));
 
         assertTrue(r.getDirection().equals(new Direction(5, 5, 10)));
 

@@ -10,7 +10,7 @@ public interface ShapeInterface {
      * The label of the shape.
      * @return the label of the shape.
      */
-    String label();
+    String getLabel();
 
     /**
      * Determines whether the given coordinates are inside this shape or not.
