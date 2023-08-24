@@ -25,6 +25,4 @@ public interface InitializedProgramsInterface<R extends RobotInterface<Direction
      * @return a message informing what was executed.
      */
     String executeNext(EnvironmentInterface<R, S> env);
-
-    void print();
 }

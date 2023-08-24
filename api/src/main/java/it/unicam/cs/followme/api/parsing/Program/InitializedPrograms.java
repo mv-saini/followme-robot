@@ -55,28 +55,12 @@ public class InitializedPrograms<R extends RobotInterface<Direction>, S extends 
             return null;
         RobotCommand robotCommand = this.programList.getNodeRobotCommand(this.runningCounter);
 
-        if(nextIsLoop(robotCommand)) return executeLoop(robotCommand, env);
+        if(this.programList.getNodeLoopType(this.runningCounter) != null) return executeLoop(robotCommand, env);
         else return executeBasic(robotCommand, env);
     }
 
     /**
-     * Determine if the next program is a loop or not.
-     * @param programLabel the next program name.
-     * @return true if loop otherwise false -> basic program.
-     */
-    private boolean nextIsLoop(RobotCommand programLabel) {
-        switch(programLabel){
-            case REPEAT, UNTIL, FOREVER, DONE -> {
-                return true;
-            }
-            default -> {
-                return false;
-            }
-        }
-    }
-
-    /**
-     * calculates the movement of the robot.
+     * Calculates the movement of the robot.
      * @param programLabel the program name.
      * @param env the environment that is affected.
      * @return a message informing what was executed.
@@ -232,30 +216,16 @@ public class InitializedPrograms<R extends RobotInterface<Direction>, S extends 
      */
     private String follow(EnvironmentInterface<R,S> env, String[] args) {
         Coordinates robotCoords = env.getRobotCoords(this.robot);
-        //Map<R, Coordinates> robotsWithLabel = env.robotsWithLabel(args[0]);
         List<Coordinates> avgOf = env.robotsWithLabel(args[0]).values().stream()
                 .filter(coordinates -> env.distanceBetween(robotCoords, coordinates) <= Double.parseDouble(args[1]))
                 .collect(Collectors.toCollection(LinkedList::new));
-        /*List<Coordinates> avgOf = new LinkedList<>();
-        robotsWithLabel.forEach((r, coordinates) -> {
-            if(Double.parseDouble(args[1]) >= env.distanceBetween(robotCoords, coordinates)){
-                avgOf.add(coordinates);
-            }
-        });*/
         Coordinates avg = env.averageOf(avgOf);
-        if(!avgOf.isEmpty()){
+        if(!avgOf.isEmpty())
             return proceedSpecific(env, new String[]{String.valueOf(avg.getX()), String.valueOf(avg.getY()), args[2]});
-        }
-        else{
+        else
             return proceedRandom(env, new String[]{
-                    String.valueOf(Double.parseDouble(args[1]) * -1),
-                    args[1],
-                    String.valueOf(Double.parseDouble(args[1]) * -1),
-                    args[1],
-                    args[2]
-            });
-        }
-        //this.runningCounter++;
+                    String.valueOf(Double.parseDouble(args[1]) * -1), args[1],
+                    String.valueOf(Double.parseDouble(args[1]) * -1), args[1], args[2]});
     }
 
     /**
@@ -265,7 +235,6 @@ public class InitializedPrograms<R extends RobotInterface<Direction>, S extends 
      */
     private String halt(EnvironmentInterface<R,S> env) {
         this.robot.getDirection().setSpeed(0);
-        signal(env, new String[0]);
         return "A robot has stopped";
     }
 
@@ -328,19 +297,5 @@ public class InitializedPrograms<R extends RobotInterface<Direction>, S extends 
             return "Ended a cycle\n\n" + executeNext(env);
         }
         return "DONE";
-    }
-
-    @Override
-    public void print() {
-        for(int i = 0; i < this.programList.size(); i++){
-            if(this.programList.getNodeLoopType(i) != null) {
-                System.out.println(i + " " + this.programList.getNodeRobotCommand(i) + " " + Arrays.toString(this.programList.getNodeArgs(i)) + " " +
-                        this.programList.getNodeLoopType(i).getJumpTo());
-            }
-            else{
-                System.out.println(i + " " + this.programList.getNodeRobotCommand(i) + " " + Arrays.toString(this.programList.getNodeArgs(i)) + " " +
-                        null);
-            }
-        }
     }
 }
