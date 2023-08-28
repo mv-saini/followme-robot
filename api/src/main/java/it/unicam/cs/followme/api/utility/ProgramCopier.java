@@ -32,8 +32,7 @@ public class ProgramCopier<R extends RobotInterface<Direction>, S extends ShapeI
      * @param toMakeCopyOf the list to make a copy of.
      * @param i the program counter of the program to be copied.
      */
-    private void addCopy(LinkedPrograms<R, S> copied,
-                         LinkedPrograms<R, S> toMakeCopyOf, int i){
+    private void addCopy(LinkedPrograms<R, S> copied, LinkedPrograms<R, S> toMakeCopyOf, int i){
 
         LoopProgramsInterface<R, S> loop = toMakeCopyOf.getNodeLoopType(i);
         String[] args = toMakeCopyOf.getNodeArgs(i);

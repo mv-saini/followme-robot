@@ -23,7 +23,7 @@ public final class ShapeCircle implements ShapeInterface {
 
     @Override
     public boolean insideArea(Coordinates c, Coordinates centerShape) {
-        //(x - h)² + (y - k)² ≤ r²
+        //SQRT((x - h)² + (y - k)²) ≤ r
         double distance = Math.sqrt(Math.pow(c.getX() - centerShape.getX(), 2) + Math.pow(c.getY() - centerShape.getY(), 2));
         return distance <= radius;
     }
