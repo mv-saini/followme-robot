@@ -256,7 +256,7 @@ public class SceneController implements Initializable {
      * @throws IOException
      */
     public void parseFiles(File env, File program, int robots) throws FollowMeParserException, IOException {
-        RobotSpawner robotSpawner = new RobotSpawner();
+        RobotSpawner robotSpawner = RobotSpawner.createDefaultGenerator();
         this.controller.parseFiles(env, program, robotSpawner.generateRobots(robots));
         this.controller.createExecutor();
         drawElements();

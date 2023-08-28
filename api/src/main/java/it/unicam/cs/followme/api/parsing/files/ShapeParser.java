@@ -14,7 +14,7 @@ import java.util.*;
  * @author Mohit Vijay Saini
  * @see ShapeParserInterface
  */
-public class ShapeParser implements ShapeParserInterface {
+public class ShapeParser implements ShapeParserInterface<ShapeInterface> {
 
     /**
      * Shapes and their coordinates.

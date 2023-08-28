@@ -8,46 +8,45 @@ import it.unicam.cs.followme.api.model.RobotInterface;
 import java.util.*;
 
 /**
- * This class generates n number of robots between a pre-defined range (x,y) with random direction and speed.
+ * This function interface generates n number of robots between a pre-defined range (x,y) with random direction and speed.
  * @author Mohit Vijay Saini
  */
-public class RobotSpawner {
+@FunctionalInterface
+public interface RobotSpawner {
 
     /**
-     * Min value for x and y.
-     */
-    private final int MIN_RANDOM = -10;
-
-    /**
-     * Max value for x and y.
-     */
-    private final int MAX_RANDOM = 10;
-
-    private final Random random = new Random();
-
-    /**
-     * Generates robot with random values.
-     * @param n number of robots to generate.
+     * Generates a map of robots along with their coordinates.
+     * @param n the number of robots to generate.
      * @return the generated robots and their coordinates.
      */
-    public Map<RobotInterface<Direction>, Coordinates> generateRobots(int n){
+    Map<RobotInterface<Direction>, Coordinates> generateRobots(int n);
 
-        Map<RobotInterface<Direction>, Coordinates> robots = new HashMap<>();
+    /**
+     * Creates a default robot generator instance. Uses a lambda expression to generate robots.
+     * @return a default RobotSpawner instance.
+     */
+    static RobotSpawner createDefaultGenerator() {
+        return (n) -> {
+            Map<RobotInterface<Direction>, Coordinates> robots = new HashMap<>();
+            Random random = new Random();
 
-        for(int i = 0; i < n; i++){
-            robots.put(new Robot<>(new Direction(random.nextDouble(), random.nextDouble(), random.nextDouble())),
-                    new Coordinates(randomGeneratorRange(), randomGeneratorRange())
-            );
-        }
+            for (int i = 0; i < n; i++) {
+                robots.put(new Robot<>(new Direction(random.nextDouble(), random.nextDouble(), random.nextDouble())),
+                        new Coordinates(randomGeneratorRange(random), randomGeneratorRange(random)));
+            }
 
-        return robots;
+            return robots;
+        };
     }
 
     /**
-     * Random number between a pre-defined range.
-     * @return the number generated.
+     * Generates a random number within a pre-defined range.
+     * @param random the instance to generate random numbers within the range.
+     * @return a randomly generated double.
      */
-    private double randomGeneratorRange(){
+    private static double randomGeneratorRange(Random random) {
+        int MIN_RANDOM = -10;
+        int MAX_RANDOM = 10;
         return MIN_RANDOM + ((MAX_RANDOM - MIN_RANDOM) * random.nextDouble());
     }
 

@@ -19,7 +19,7 @@ class ControllerTest {
     void TestApp() throws FollowMeParserException, IOException {
         Controller<RobotInterface<Direction>, ShapeInterface> controller = Controller.getController();
 
-        RobotSpawner spawner = new RobotSpawner();
+        RobotSpawner spawner = RobotSpawner.createDefaultGenerator();
 
         Map<RobotInterface<Direction>, Coordinates> robotsGenerated = spawner.generateRobots(3);
 

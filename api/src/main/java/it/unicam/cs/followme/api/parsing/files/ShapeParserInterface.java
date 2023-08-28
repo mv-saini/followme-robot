@@ -14,14 +14,12 @@ import java.util.Map;
  * Any class that implements this interface can add the parsed shapes.
  * @author Mohit Vijay Saini
  */
-public interface ShapeParserInterface {
+public interface ShapeParserInterface<S extends ShapeInterface> {
 
     /**
      * This method adds the parsed shapes from the {@link FollowMeShapeChecker}.
      * @param listShapeData the list of shapes parsed by {@link FollowMeShapeChecker}.
      * @return the shapes and their coordinates in the environment.
-     * @throws FollowMeParserException
-     * @throws IOException
      */
-    Map<ShapeInterface, Coordinates> parseShapes(List<ShapeData> listShapeData) throws FollowMeParserException, IOException;
+    Map<S, Coordinates> parseShapes(List<ShapeData> listShapeData);
 }

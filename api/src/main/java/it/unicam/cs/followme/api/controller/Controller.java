@@ -44,7 +44,7 @@ public class Controller<R extends RobotInterface<Direction>, S extends ShapeInte
     /**
      * List of copied programs for each robot.
      */
-    private List<InitializedProgramsInterface<R, S>> initializedPrograms;
+    private final List<InitializedProgramsInterface<R, S>> initializedPrograms;
 
     /**
      * Executor will execute N number of programs inside the list above.

@@ -25,11 +25,11 @@ class UntilProgramTest {
         Handler<RobotInterface<Direction>, ShapeInterface> handler = new Handler<>();
         FollowMeParser parser = new FollowMeParser(handler);
 
-        ShapeParserInterface shapeParser = new ShapeParser();
+        ShapeParserInterface<ShapeInterface> shapeParser = new ShapeParser();
 
         List<ShapeData> list = parser.parseEnvironment(new File(Objects.requireNonNull(getClass().getClassLoader().getResource("testEnv.txt")).getFile()));
 
-        RobotSpawner spawn = new RobotSpawner();
+        RobotSpawner spawn = RobotSpawner.createDefaultGenerator();
 
         RobotInterface<Direction> r1 = new Robot<>(new Direction(5, 5, 5));
         Coordinates c = new Coordinates(-100, -100);
@@ -52,11 +52,11 @@ class UntilProgramTest {
         Handler<RobotInterface<Direction>, ShapeInterface> handler = new Handler<>();
         FollowMeParser parser = new FollowMeParser(handler);
 
-        ShapeParserInterface shapeParser = new ShapeParser();
+        ShapeParserInterface<ShapeInterface> shapeParser = new ShapeParser();
 
         List<ShapeData> list = parser.parseEnvironment(new File(Objects.requireNonNull(getClass().getClassLoader().getResource("testEnv.txt")).getFile()));
 
-        RobotSpawner spawn = new RobotSpawner();
+        RobotSpawner spawn = RobotSpawner.createDefaultGenerator();
 
         RobotInterface<Direction> r1 = new Robot<>(new Direction(5, 5, 5));
         Coordinates c = new Coordinates(-100, -100);
