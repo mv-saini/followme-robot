@@ -33,7 +33,7 @@
          </children></Pane>
       <ScrollPane GridPane.columnIndex="1">
          <content>
-            <TextFlow fx:id="logger" prefHeight="630.0" prefWidth="149.0" />
+            <TextFlow fx:id="textFlow" prefHeight="630.0" prefWidth="149.0" />
          </content>
       </ScrollPane>
     </children>

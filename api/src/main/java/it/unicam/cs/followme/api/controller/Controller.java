@@ -140,6 +140,7 @@ public class Controller<R extends RobotInterface<Direction>, S extends ShapeInte
      */
     private void loadProgramEachRobot(List<R> robots, LinkedPrograms<R, S> programs){
         ProgramCopier<R, S> programCopier = new ProgramCopier<>();
+        //programCopier and programs are effectively final.
         robots.forEach(r -> this.initializedPrograms.add(new InitializedPrograms<>(programCopier.makeCopy(programs), r)));
     }
 

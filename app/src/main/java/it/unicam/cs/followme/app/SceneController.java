@@ -65,12 +65,12 @@ public class SceneController implements Initializable {
      * To show what happened when the next button is pressed.
      */
     @FXML
-    public TextFlow logger = new TextFlow();
+    public TextFlow textFlow = new TextFlow();
 
     /**
      * List containing the shapes and number of robots that have been added to the environment.
      */
-    private final ArrayList<String> loggerList = new ArrayList<>();
+    private final ArrayList<String> textFlowList = new ArrayList<>();
 
     /**
      * List containing all the programs that have been executed.
@@ -115,7 +115,7 @@ public class SceneController implements Initializable {
         styling();
         setZoomScroll();
         this.buttonBar.toFront();
-        this.logger.toFront();
+        this.textFlow.toFront();
     }
 
     /**
@@ -132,7 +132,7 @@ public class SceneController implements Initializable {
      */
     private void styling(){
         this.buttonBar.setStyle("-fx-alignment: CENTER;");
-        this.logger.setStyle("-fx-background-color: gray;");
+        this.textFlow.setStyle("-fx-background-color: gray;");
         this.drawingArea.setStyle("-fx-background-color: #D3D3D3");
         this.buttonBar.setStyle("-fx-background-color: gray;");
         this.stepsPane.setStyle("-fx-background-color: gray;");
@@ -210,8 +210,8 @@ public class SceneController implements Initializable {
      */
     private void helperClearScene() {
         this.contentGroup.getChildren().clear();
-        this.logger.getChildren().clear();
-        this.loggerList.clear();
+        this.textFlow.getChildren().clear();
+        this.textFlowList.clear();
     }
 
     /**
@@ -269,9 +269,9 @@ public class SceneController implements Initializable {
         helperClearScene();
         drawShapes();
         drawRobots();
-        this.loggerList.forEach(s -> this.logger.getChildren().add(new Text(s + "\n\n")));
-        this.logger.getChildren().add(new Text("--------------------\n\n"));
-        this.programsExecuted.forEach(s -> this.logger.getChildren().add(new Text(s + "\n\n")));
+        this.textFlowList.forEach(s -> this.textFlow.getChildren().add(new Text(s + "\n\n")));
+        this.textFlow.getChildren().add(new Text("--------------------\n\n"));
+        this.programsExecuted.forEach(s -> this.textFlow.getChildren().add(new Text(s + "\n\n")));
     }
 
     /**
@@ -286,7 +286,7 @@ public class SceneController implements Initializable {
 
             contentGroup.getChildren().add(c);
         });
-        loggerList.add("Added " + this.controller.getEnvironment().getRobots().size() + " robots");
+        textFlowList.add("Added " + this.controller.getEnvironment().getRobots().size() + " robots");
     }
 
     /**
@@ -320,7 +320,7 @@ public class SceneController implements Initializable {
                 rectangle.getWidth() * this.zoomLevel, rectangle.getHeight() * this.zoomLevel);
         r.setFill(javafx.scene.paint.Color.BLUE);
 
-        loggerList.add("Added a rectangle");
+        textFlowList.add("Added a rectangle");
 
         contentGroup.getChildren().add(r);
     }
@@ -337,7 +337,7 @@ public class SceneController implements Initializable {
         Circle c = new Circle(scaled.getX() * this.zoomLevel, scaled.getY() * this.zoomLevel,
                 circle.getRadius() * this.zoomLevel, javafx.scene.paint.Color.RED);
 
-        loggerList.add("Added a circle");
+        textFlowList.add("Added a circle");
 
         contentGroup.getChildren().add(c);
     }
