@@ -26,7 +26,7 @@ public class EnvironmentGenerator<R extends RobotInterface<Direction>> implement
     /**
      * This adds the shapes parsed by the parser to the environment
      */
-    private final ShapeParserInterface shapeParser;
+    private final ShapeParserInterface<ShapeInterface> shapeParser;
 
     /**
      * Generates the environment file loader.
