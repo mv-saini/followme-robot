@@ -202,7 +202,6 @@ public class InitializedPrograms<R extends RobotInterface<Direction>, S extends 
      * @return a message informing that the robot has stopped signalling the given label.
      */
     private String unsignal(EnvironmentInterface<R,S> env, String[] args) {
-        System.out.println("YO WHATS UP");
         if(this.robot.getLabel().equals(args[0])) this.robot.resetLabel();
         env.update(this.robot, env.getRobotCoords(robot));
         this.runningCounter++;
@@ -216,6 +215,7 @@ public class InitializedPrograms<R extends RobotInterface<Direction>, S extends 
      * @return a message informing the movement of the robot.
      */
     private String follow(EnvironmentInterface<R,S> env, String[] args) {
+        System.out.println(Arrays.toString(args));
         Coordinates robotCoords = env.getRobotCoords(this.robot);
         List<Coordinates> avgOf = env.robotsWithLabel(args[0]).values().stream()
                 .filter(coordinates -> env.distanceBetween(robotCoords, coordinates) <= Double.parseDouble(args[1]))
@@ -279,10 +279,10 @@ public class InitializedPrograms<R extends RobotInterface<Direction>, S extends 
     private String loopUtil(EnvironmentInterface<R, S> env, LoopProgramsInterface<R, S> loopProgram){
         if(!loopProgram.conditionSatisfied(env, this.robot)){
             this.runningCounter++;
-            return "Looping " + loopProgram + "\n\n" + executeNext(env);
+            return executeNext(env);
         }
         else this.runningCounter = loopProgram.getJumpTo();
-        return "Ended " + loopProgram + " loop"+ "\n\n" + executeNext(env);
+        return executeNext(env);
     }
 
     /**
@@ -295,7 +295,7 @@ public class InitializedPrograms<R extends RobotInterface<Direction>, S extends 
     private String endLoop(EnvironmentInterface<R, S> env, LoopProgramsInterface<R, S> doneProgram) {
         if(doneProgram.conditionSatisfied(null, null)){
             this.runningCounter = doneProgram.getJumpTo();
-            return "Ended a cycle\n\n" + executeNext(env);
+            return executeNext(env);
         }
         return "DONE";
     }

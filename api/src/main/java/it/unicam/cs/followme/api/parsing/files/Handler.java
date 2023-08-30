@@ -101,12 +101,16 @@ public class Handler<R extends RobotInterface<Direction>, S extends ShapeInterfa
 
     @Override
     public void unsignalCommand(String label) {
-        this.programList.add(new Program<>(RobotCommand.SIGNAL, new String[]{label}, null));
+        this.programList.add(new Program<>(RobotCommand.UNSIGNAL, new String[]{label}, null));
     }
 
     @Override
     public void followCommand(String label, double[] args) {
-        this.programList.add(new Program<>(RobotCommand.FOLLOW, commandHelperDoubleToString(args), null));
+        String[] stringArgs = commandHelperDoubleToString(args);
+        String[] concatenatedArray = new String[stringArgs.length + 1];
+        concatenatedArray[0] = label;
+        System.arraycopy(stringArgs, 0, concatenatedArray, 1, stringArgs.length);
+        this.programList.add(new Program<>(RobotCommand.FOLLOW, concatenatedArray, null));
     }
 
     @Override

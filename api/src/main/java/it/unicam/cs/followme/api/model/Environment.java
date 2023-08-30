@@ -59,7 +59,7 @@ public class Environment<R extends RobotInterface<Direction>, S extends ShapeInt
     @Override
     public Coordinates averageOf(List<Coordinates> avgOf){
         if(avgOf.isEmpty())
-            throw new IllegalArgumentException("List is empty.");
+            return null;
 
         return new Coordinates(
                 avgOf.stream().collect(Collectors.averagingDouble(Coordinates::getX)),
