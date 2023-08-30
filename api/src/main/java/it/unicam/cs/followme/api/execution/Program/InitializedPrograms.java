@@ -215,7 +215,6 @@ public class InitializedPrograms<R extends RobotInterface<Direction>, S extends 
      * @return a message informing the movement of the robot.
      */
     private String follow(EnvironmentInterface<R,S> env, String[] args) {
-        System.out.println(Arrays.toString(args));
         Coordinates robotCoords = env.getRobotCoords(this.robot);
         List<Coordinates> avgOf = env.robotsWithLabel(args[0]).values().stream()
                 .filter(coordinates -> env.distanceBetween(robotCoords, coordinates) <= Double.parseDouble(args[1]))
