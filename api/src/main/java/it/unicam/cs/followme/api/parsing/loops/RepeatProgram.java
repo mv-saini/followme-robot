@@ -42,6 +42,9 @@ public final class RepeatProgram<R extends RobotInterface<Direction>, S extends 
             this.counter++;
             return false;
         }
+        else{
+            this.counter = 0;
+        }
         return true;
     }
 

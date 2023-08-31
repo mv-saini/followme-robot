@@ -51,8 +51,7 @@ public class ExecuteProgram<R extends RobotInterface<Direction>, S extends Shape
                 }
             }
         }
-        if(allThoseJustExecuted.isEmpty()) allThoseJustExecuted.add("ALL ROBOTS TERMINATED THEIR PROGRAMS");
-        allThoseJustExecuted.add("--------------------");
+        if(!allThoseJustExecuted.isEmpty()) allThoseJustExecuted.add("--------------------");
         return allThoseJustExecuted;
     }
 

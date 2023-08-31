@@ -53,7 +53,7 @@ public class InitializedPrograms<R extends RobotInterface<Direction>, S extends 
     @Override
     public String executeNext(EnvironmentInterface<R, S> env){
         if(this.runningCounter == this.programList.size())
-            return null;
+            return "ALL ROBOTS TERMINATED THEIR PROGRAMS";
         RobotCommand robotCommand = this.programList.getNodeRobotCommand(this.runningCounter);
 
         if(this.programList.getNodeLoopType(this.runningCounter) != null) return executeLoop(robotCommand, env);
